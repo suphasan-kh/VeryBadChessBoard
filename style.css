@@ -1,0 +1,51 @@
+.light {
+    background-color:antiquewhite;
+}
+
+.dark {
+    background-color:burlywood;
+}
+
+.dark, .light {
+    padding-bottom: 0px !important;
+    width: var(--getsize);
+    height: var(--getsize);
+    vertical-align: bottom;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.light:hover {
+    background-color:rgb(250, 246, 215);
+}
+
+.dark:hover {
+    background-color:rgb(222, 205, 135);
+}
+
+img.piece {
+    display: flex !important;
+    width: var(--getsize);
+    height: var(--getsize);
+    -webkit-user-drag: none;
+    user-select: none;
+    z-index: "1";
+}
+
+table.boards {
+    table-layout: fixed !important;
+}
+
+/*
+img.k.w {
+    opacity: 100%;
+}*/
+
+img.piece:hover {
+    cursor: grab;
+}
+
+img.piece:active:hover {
+    cursor: grabbing;
+}
+
