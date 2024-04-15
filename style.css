@@ -13,6 +13,7 @@
     vertical-align: bottom;
     -webkit-user-drag: none;
     user-select: none;
+    z-index: inherit;
 }
 
 .light:hover {
@@ -23,21 +24,22 @@
     background-color:rgb(222, 205, 135);
 }
 
-img.piece {
+.piece {
     display: flex !important;
     width: var(--getsize);
     height: var(--getsize);
     -webkit-user-drag: none;
     user-select: none;
-    z-index: "1";
+    z-index: 1 !important;
 }
 
 table.boards {
     table-layout: fixed !important;
+    z-index: -1;
 }
 
 /*
-img.k.w {
+img.K.w {
     opacity: 100%;
 }*/
 
@@ -47,5 +49,26 @@ img.piece:hover {
 
 img.piece:active:hover {
     cursor: grabbing;
+}
+
+#getBoard {
+    position:relative;
+    z-index: 0 !important;
+}
+
+.inlight, .indark {
+    position:absolute;
+    z-index: 0 !important;
+    font-size: var(--getfont);
+    user-select: none;
+    font-weight: 600;
+}
+
+.indark {
+    color:antiquewhite;
+}
+
+.inlight {
+    color:burlywood;
 }
 

@@ -2,6 +2,8 @@ const w = window.innerWidth;
 const h = window.innerHeight;
 const size = Math.min(h,w);
 const realsize = Math.floor(size*0.1);
+document.documentElement.style.setProperty("--getsize", `${realsize}px`);
+document.documentElement.style.setProperty("--getfont", `${realsize/4}px`);
 
 let selectedPiece = null;
 let selectedCell = null;
@@ -26,25 +28,41 @@ const pos_arr = ["a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
 "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2",
 "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"];
 
-const kw = `<img class="piece k w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Chess_klt45.svg/1920px-Chess_klt45.svg.png">`;
-const kb = `<img class="piece k b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Chess_kdt45.svg/1920px-Chess_kdt45.svg.png">`;
-const qw = `<img class="piece q w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Chess_qlt45.svg/1920px-Chess_qlt45.svg.png">`;
-const qb = `<img class="piece q b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Chess_qdt45.svg/1920px-Chess_qdt45.svg.png">`;
-const rw = `<img class="piece r w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Chess_rlt45.svg/1920px-Chess_rlt45.svg.png">`;
-const rb = `<img class="piece r b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Chess_rdt45.svg/1920px-Chess_rdt45.svg.png">`;
-const bw = `<img class="piece b w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Chess_blt45.svg/1920px-Chess_blt45.svg.png">`;
-const bb = `<img class="piece b b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Chess_bdt45.svg/1920px-Chess_bdt45.svg.png">`;
-const nw = `<img class="piece n w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Chess_nlt45.svg/1920px-Chess_nlt45.svg.png">`;
-const nb = `<img class="piece n b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Chess_ndt45.svg/1920px-Chess_ndt45.svg.png">`;
-const pw = `<img class="piece p w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Chess_plt45.svg/1920px-Chess_plt45.svg.png">`;
-const pb = `<img class="piece p b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Chess_pdt45.svg/1920px-Chess_pdt45.svg.png">`;
+const kw = `<img class="piece K w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Chess_klt45.svg/1920px-Chess_klt45.svg.png">`;
+const kb = `<img class="piece K b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Chess_kdt45.svg/1920px-Chess_kdt45.svg.png">`;
+const qw = `<img class="piece Q w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Chess_qlt45.svg/1920px-Chess_qlt45.svg.png">`;
+const qb = `<img class="piece Q b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Chess_qdt45.svg/1920px-Chess_qdt45.svg.png">`;
+const rw = `<img class="piece R w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Chess_rlt45.svg/1920px-Chess_rlt45.svg.png">`;
+const rb = `<img class="piece R b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Chess_rdt45.svg/1920px-Chess_rdt45.svg.png">`;
+const bw = `<img class="piece B w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Chess_blt45.svg/1920px-Chess_blt45.svg.png">`;
+const bb = `<img class="piece B b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Chess_bdt45.svg/1920px-Chess_bdt45.svg.png">`;
+const nw = `<img class="piece N w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Chess_nlt45.svg/1920px-Chess_nlt45.svg.png">`;
+const nb = `<img class="piece N b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Chess_ndt45.svg/1920px-Chess_ndt45.svg.png">`;
+const pw = `<img class="piece P w" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Chess_plt45.svg/1920px-Chess_plt45.svg.png">`;
+const pb = `<img class="piece P b" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Chess_pdt45.svg/1920px-Chess_pdt45.svg.png">`;
 
 
 function getWhiteBoard() {
     const board = document.getElementById("getBoard");
-    document.documentElement.style.setProperty("--getsize", `${realsize}px`);
-    document.documentElement.style.setProperty("--getfont", `${realsize/4}px`);
     board.innerHTML = `
+    <text class="inlight" style="top:${realsize/20}px; left:${realsize/15}px">8</text>
+    <text class="indark" style="top:${realsize + realsize/20}px; left:${realsize/15}px">7</text>
+    <text class="inlight" style="top:${2*realsize + realsize/20}px; left:${realsize/15}px">6</text>
+    <text class="indark" style="top:${3*realsize + realsize/20}px; left:${realsize/15}px">5</text>
+    <text class="inlight" style="top:${4*realsize + realsize/20}px; left:${realsize/15}px">4</text>
+    <text class="indark" style="top:${5*realsize + realsize/20}px; left:${realsize/15}px">3</text>
+    <text class="inlight" style="top:${6*realsize + realsize/20}px; left:${realsize/15}px">2</text>
+    <text class="indark" style="top:${7*realsize + realsize/20}px; left:${realsize/15}px">1</text>
+
+    <text class="indark" style="top:${8*realsize - realsize/20 - realsize/4}px; left:${realsize - realsize/5}px">a</text>
+    <text class="inlight" style="top:${8*realsize - realsize/20 - realsize/4}px; left:${2*realsize - realsize/5}px">b</text>
+    <text class="indark" style="top:${8*realsize - realsize/20 - realsize/4}px; left:${3*realsize - realsize/5}px">c</text>
+    <text class="inlight" style="top:${8*realsize - realsize/20 - realsize/4}px; left:${4*realsize - realsize/5}px">d</text>
+    <text class="indark" style="top:${8*realsize - realsize/20 - realsize/4}px; left:${5*realsize - realsize/5}px">e</text>
+    <text class="inlight" style="top:${8*realsize - realsize/20 - realsize/4}px; left:${6*realsize - realsize/5}px">f</text>
+    <text class="indark" style="top:${8*realsize - realsize/20 - realsize/4}px; left:${7*realsize - realsize/5}px">g</text>
+    <text class="inlight" style="top:${8*realsize - realsize/20 - realsize/4}px; left:${8*realsize - realsize/5}px">h</text>
+
     <table id="board" cellspacing="0" cellpadding="0" width="${realsize*8}px">
         <tr height="${realsize}px">
             <td class="light" id="a8"> ${rb} </td>
@@ -133,9 +151,8 @@ function getWhiteBoard() {
 
 function getBlackBoard() {
     const board = document.getElementById("getBoard");
-    document.documentElement.style.setProperty("--getsize", `${realsize}px`);
-    document.documentElement.style.setProperty("--getfont", `${realsize/4}px`);
     board.innerHTML = `
+
     <table id="board" cellspacing="0" cellpadding="0" width="${realsize*8}px">
         <tr height="${realsize}px">
             <td class="light" id="h1"> ${rw} </td>
@@ -232,10 +249,11 @@ function addMovable() {
             piece.addEventListener("mouseenter", function() {console.log("Enter")});
             piece.addEventListener("mousedown", function() {down = true;selectedPiece=piece;piece.style.zIndex="2"});
             piece.addEventListener("mousemove", function() {moveWithPointer(down, piece, event)});
-            piece.addEventListener("mouseup", function() {down = false;changeParent();piece.style.zIndex="1";selectedPiece=null;});
-            piece.addEventListener("mouseleave", function() {down = false;if(selectedPiece!=null){selectedPiece.style.transform=`translate(${selectedPiece.offsetLeft}px,${selectedPiece.offsetTop})`};selectedPiece=null});
+            piece.addEventListener("mouseup", function() {down = false;if(selectedPiece!=null){changeParent()};piece.style.zIndex="1";selectedPiece=null;});
+            piece.addEventListener("mouseleave", function() {piece.style.zIndex="1";down = false;if(selectedPiece!=null){selectedPiece.style.transform=`translate(${selectedPiece.offsetLeft}px,${selectedPiece.offsetTop})`};selectedPiece=null});
 
             document.addEventListener("mousemove", function() {getElement(event)});
+            
         }
     }
 }
