@@ -247,12 +247,13 @@ function addMovable() {
         let down = false;
         if (piece != null) {
             piece.addEventListener("mouseenter", function() {console.log("Enter")});
-            piece.addEventListener("mousedown", function() {down = true;selectedPiece=piece;piece.style.zIndex="2"});
+            piece.addEventListener("mousedown", function() {down = true;selectedPiece=piece;selectedPiece.style.transform=`translate(${event.clientX-selectedPiece.parentNode.getBoundingClientRect().left-realsize/2}px,${event.clientY-selectedPiece.parentNode.getBoundingClientRect().top-realsize/2}px)`;piece.style.zIndex="2"});
             piece.addEventListener("mousemove", function() {moveWithPointer(down, piece, event)});
             piece.addEventListener("mouseup", function() {down = false;if(selectedPiece!=null){changeParent()};piece.style.zIndex="1";selectedPiece=null;});
             piece.addEventListener("mouseleave", function() {piece.style.zIndex="1";down = false;if(selectedPiece!=null){selectedPiece.style.transform=`translate(${selectedPiece.offsetLeft}px,${selectedPiece.offsetTop})`};selectedPiece=null});
+            //piece.addEventListener("mouseleave", function() {piece.style.zIndex="1";console.log("left now");if(selectedPiece!=null){console.log("left");selectedPiece.style.transform=`translate(${event.clientX-selectedPiece.parentNode.getBoundingClientRect().left-realsize/2}px,${event.clientY-selectedPiece.parentNode.getBoundingClientRect().top-realsize/2}px)`;console.log("after")}});
 
-            document.addEventListener("mousemove", function() {getElement(event)});
+            document.addEventListener("mousemove", function() {getElement(event);});
             
         }
     }

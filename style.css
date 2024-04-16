@@ -31,11 +31,13 @@
     -webkit-user-drag: none;
     user-select: none;
     z-index: 1 !important;
+    visibility:visible;
 }
 
 table.boards {
     table-layout: fixed !important;
     z-index: -1;
+    display:flex !important;
 }
 
 /*
