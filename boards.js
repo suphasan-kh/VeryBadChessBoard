@@ -267,11 +267,14 @@ function getBlackBoard() {
 function documentListener() {
     document.addEventListener("mousemove", function() {getElement(event);setLatestPiece()});
     document.addEventListener("click", function() {
-        console.log("click event");
+        //console.log("click event");
         if (clicked && !isSameCell()) {
-            console.log("changed?");
+            selectedPiece.parentNode.classList.remove("selected");
+            console.log("cell changed");
             console.log(selectedPiece);
             changeParent();
+            selectedPiece.setAttribute("style","opacity: 100%");
+            clicked = false;
         }
     });
 }
@@ -291,30 +294,39 @@ function addMovable() {
         const id = pos_arr[i];
         const piece = document.querySelector(`#${id} > img`);
         let down = false;
-        let toggleClick = false;
         if (piece != null) {
-            piece.addEventListener("mousedown", function() {down = true;selectedPiece=piece;setLatestPiece();moveSelectedToMouse();piece.style.zIndex="2"});
+            piece.addEventListener("mousedown", function() {
+                if (!clicked) {
+                    down = true;selectedPiece=piece;setLatestPiece();moveSelectedToMouse();piece.style.zIndex="2";
+                    selectedPiece.parentNode.classList.add("selected");
+                } else {
+                    selectedPiece.parentNode.classList.remove("selected");
+                    changeParent();
+                }
+            });
             piece.addEventListener("mousemove", function() {moveWithPointer(down, piece, event)});
             piece.addEventListener("mouseup", function() {
                 if (isSameCell()) {
                     console.log("same cell")
                     down = false;
-                    if (toggleClick) {
+                    if (clicked) {
+                        selectedPiece.parentNode.classList.remove("selected");
                         console.log("was clicked");
                         clicked = false;
-                        toggleClick = false;
                         moveSelectedToParent();
+                        selectedPiece.setAttribute("style","opacity: 100%");
                         selectedPiece = null;
                     } else {
                         console.log("was not clicked");
                         clicked = true;
-                        toggleClick = true;
                         moveSelectedToParent();
                         selectedPiece = piece;
+                        selectedPiece.setAttribute("style","opacity: 60%");
                         console.log(selectedPiece);
                     }
                 } else {
                     down = false;
+                    selectedPiece.parentNode.classList.remove("selected");
                     if(selectedPiece!=null){
                         changeParent()
                     };
@@ -370,7 +382,7 @@ function moveWithPointer(down, piece, event) {
         let yc = event.clientY - rect.top - realsize/2;
         let xpos = piece.offsetLeft;
         let ypos = piece.offsetTop;
-        console.log(`xpos ${xpos} ypos ${ypos}`)
+        //console.log(`xpos ${xpos} ypos ${ypos}`)
         xdist = (xc - xpos);
         ydist = (yc - ypos);
         piece.style.transform = `translate(${xdist}px,${ydist}px)`;
