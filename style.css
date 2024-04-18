@@ -25,18 +25,19 @@
 }
 
 .piece {
-    display: flex !important;
+    display: block !important;
     width: var(--getsize);
     height: var(--getsize);
     -webkit-user-drag: none;
     user-select: none;
-    z-index: 1 !important;
-    visibility:visible;
+    z-index: 2 !important;
+    position: static;
 }
 
-table.boards {
+#board {
+    position:absolute;
     table-layout: fixed !important;
-    z-index: -1;
+    z-index: 0;
     display:flex !important;
 }
 
@@ -55,12 +56,13 @@ img.piece:active:hover {
 
 #getBoard {
     position:relative;
+    display: flex;
     z-index: 0 !important;
 }
 
 .inlight, .indark {
     position:absolute;
-    z-index: 0 !important;
+    z-index: 1 !important;
     font-size: var(--getfont);
     user-select: none;
     font-weight: 600;
@@ -74,3 +76,11 @@ img.piece:active:hover {
     color:burlywood;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+tr {
+    display: flex;
+}
